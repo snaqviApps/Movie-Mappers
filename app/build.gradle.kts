@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -19,9 +21,13 @@ android {
         versionName = "1.0"
 
         val properties = Properties()
-        properties.load(project.rootProject.file("local.properties").inputStream())
-        buildConfigField("String", "API_KEY", properties.getProperty("API_KEY"))
-
+        val localPropertiesFile = project.rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            properties.load(localPropertiesFile.inputStream())
+            buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
+        } else {
+            buildConfigField("String", "API_KEY", "\"\"")
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,9 +42,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -46,6 +53,9 @@ android {
 }
 
 dependencies {
+    // hilt
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -53,7 +63,6 @@ dependencies {
     implementation(libs.androidx.compose.material)
 
     implementation(libs.androidx.compose.runtime.livedata)
-//    implementation(libs.androidx.lifecycle.runtime.ktx.v261)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.androidx.core.ktx)
@@ -64,6 +73,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
