@@ -2,9 +2,9 @@
   This app demonstrates theoratical approach of simpler to more complex architecture and design pattern while displaying list of Movies
   featuring, 
    - Separation of concerns
-   - sealed Interface for state management
-   - repository pattern
    - Compose
+   - repository pattern
+   - state management (sealed Interface)
 
    
 # Movies' list
