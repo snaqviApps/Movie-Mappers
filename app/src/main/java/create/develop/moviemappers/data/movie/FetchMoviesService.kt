@@ -1,31 +1,27 @@
 package create.develop.moviemappers.data.movie
 
-import create.develop.moviemappers.data.MoviesServiceGET
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import create.develop.moviemappers.data.MoviesApi
 import javax.inject.Inject
+import javax.inject.Qualifier
 
 const val BASE_URL = "https://www.omdbapi.com/"
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MovieRetrofitApi
 
-class FetchMoviesService @Inject constructor() : MoviesServiceGET {     /** Movie repository Impl */
+/** Movie repository Impl */
+class FetchMoviesService @Inject constructor(
+    @MovieRetrofitApi private val moviesApi: MoviesApi
+) : MoviesApi {
+
     override suspend fun getMovie(
         id: String,
         apiKey: String
     ): Movie {
-        return RetrofitInstance
-            .movieApi
+        return moviesApi
             .getMovie(id, apiKey)
     }
 }
 
-object RetrofitInstance {
 
-    val movieApi: MoviesServiceGET by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(MoviesServiceGET::class.java)
-    }
-}

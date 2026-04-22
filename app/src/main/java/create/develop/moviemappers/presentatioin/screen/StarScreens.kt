@@ -14,54 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import create.develop.moviemappers.presentatioin.MovieScreensState
 import create.develop.moviemappers.presentatioin.StarMainViewModel
-import create.develop.moviemappers.data.movie.FetchMoviesService
 
 @Composable
 fun StarScreen(
     modifier: Modifier = Modifier,
-    starViewModel: StarMainViewModel = StarMainViewModel(
-        remoteMoviesRepository = FetchMoviesService()
-    ),
+    starViewModel: StarMainViewModel = hiltViewModel()
 ) {
-    val state by starViewModel.state.collectAsStateWithLifecycle()              // Stars
+
+    val dastate by starViewModel.state.collectAsStateWithLifecycle()              // Stars
     val mState by starViewModel.mState.collectAsStateWithLifecycle()            // Movies
 
     val context = LocalContext.current
-
-//  when {
-//        state.isLoading -> {
-//            LoadingScreen()
-//        }
-//
-//        state.isError -> {
-//            ErrorScreen(
-//                modifier = modifier,
-//                errorMessage = state.errorMessage
-//            )
-//        }
-//
-//        state.isSuccessful -> {
-//            StarInfo(
-//                modifier = modifier,
-//                stars = state.stars,
-//                onItemClicked = { name, distance ->
-//                    starViewModel.onItemClicked(name, distance)
-//                    Toast.makeText(
-//                        context,
-//                        "Star: $name, Distance: $distance",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            )
-//        }
-//
-//        state.isEmpty -> {
-//            EmptyScreen(modifier = modifier)
-//        }
-//    }
 
     when (val movieState = mState) {
         is MovieScreensState.Loading -> {

@@ -11,7 +11,7 @@ interface DataService<T> {
 
 // https://www.omdbapi.com/?t=Social+Network&apikey=44b9d35c
 
-interface MoviesServiceGET {
+interface MoviesApi {
     @GET("/")
     suspend fun getMovie(
         @Query("i") id: String = "tt3896198",       // Title: Guardians of the Galaxy Vol. 2

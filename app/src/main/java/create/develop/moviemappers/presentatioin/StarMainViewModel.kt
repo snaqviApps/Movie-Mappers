@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import create.develop.moviemappers.BuildConfig
-import create.develop.moviemappers.data.MoviesServiceGET
+import create.develop.moviemappers.data.MoviesApi
 import create.develop.moviemappers.data.movie.Movie
 import create.develop.moviemappers.data.movie.MovieDto
 import create.develop.moviemappers.data.movie.toMovieDto
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class StarMainViewModel @Inject constructor(
-    private val remoteMoviesRepository: MoviesServiceGET
+    private val remoteMoviesApi: MoviesApi
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(StarUIState(isLoading = false))
@@ -44,7 +44,7 @@ class StarMainViewModel @Inject constructor(
                     for (movieCount in 0..9) {
                         when (movieCount) {
                             0 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(apiKey = BuildConfig.API_KEY)
                                     .apply {
                                         addMovie(mList = mList, movieDto = toMovieDto())
@@ -52,7 +52,7 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             1 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(id = "tt0111503", apiKey = BuildConfig.API_KEY)
                                     .apply {
                                         addMovie(mList = mList, movieDto = toMovieDto())
@@ -60,7 +60,7 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             2 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(
                                         id = "tt0107290",                                                // Title: Jurassic Park
                                         apiKey = BuildConfig.API_KEY
@@ -71,7 +71,7 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             3 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(
                                         id = "tt0086250",
                                         apiKey = BuildConfig.API_KEY
@@ -82,20 +82,20 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             4 -> {
-                                remoteMoviesRepository
-                                    .getMovie(
+                                remoteMoviesApi
+                                    .getMovie(                                                          // Title: Independence Day
                                         id = "tt0116629",
                                         apiKey = BuildConfig.API_KEY
-                                    )          // Title: Independence Day
+                                    )
                                     .apply {
                                         addMovie(mList = mList, movieDto = toMovieDto())
                                     }
                             }
 
                             5 -> {
-                                remoteMoviesRepository
-                                    .getMovie(
-                                        id = "tt0160009",                                               // Title: Independence Day
+                                remoteMoviesApi
+                                    .getMovie(                                                         // Title: Independence Day
+                                        id = "tt0160009",
                                         apiKey = BuildConfig.API_KEY
                                     )
                                     .apply {
@@ -104,7 +104,7 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             6 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(
                                         id = "tt0043654",                                               // Title: Independence Day
                                         apiKey = BuildConfig.API_KEY
@@ -119,7 +119,7 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             7 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(
                                         id = "tt7131622",                                               // Title: Independence Day
                                         apiKey = BuildConfig.API_KEY
@@ -130,7 +130,7 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             8 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(
                                         id = "tt0062622",                                               // Title: Independence Day
                                         apiKey = BuildConfig.API_KEY
@@ -141,7 +141,7 @@ class StarMainViewModel @Inject constructor(
                             }
 
                             9 -> {
-                                remoteMoviesRepository
+                                remoteMoviesApi
                                     .getMovie(
                                         id = "tt24714414",                                               // Title: Sherri Papini: Lies, Lies, and More Lies
                                         apiKey = BuildConfig.API_KEY

@@ -9,9 +9,7 @@ plugins {
 
 android {
     namespace = "create.develop.moviemappers"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "create.develop.moviemappers"
@@ -56,6 +54,7 @@ dependencies {
     // hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Retrofit
     implementation(libs.retrofit)
