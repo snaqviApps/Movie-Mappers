@@ -20,15 +20,15 @@ retrofit = "3.0.0"
 runtimeLivedata = "1.6.0"
 
 #hilt = "2.56.2"
-hilt = "2.59.2"
+hiltVersion = "2.59.2"
 ksp = "2.2.0-2.0.2"
 
 
 [libraries]
 
 #hilt
-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
@@ -65,5 +65,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 # hilt
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

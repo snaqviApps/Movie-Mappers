@@ -17,11 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import create.develop.moviemappers.presentatioin.MovieScreensState
 import create.develop.moviemappers.presentatioin.StarMainViewModel
+import create.develop.moviemappers.data.movie.FetchMoviesService
 
 @Composable
 fun StarScreen(
     modifier: Modifier = Modifier,
-    starViewModel: StarMainViewModel = StarMainViewModel(),
+    starViewModel: StarMainViewModel = StarMainViewModel(
+        remoteMoviesRepository = FetchMoviesService()
+    ),
 ) {
     val state by starViewModel.state.collectAsStateWithLifecycle()              // Stars
     val mState by starViewModel.mState.collectAsStateWithLifecycle()            // Movies

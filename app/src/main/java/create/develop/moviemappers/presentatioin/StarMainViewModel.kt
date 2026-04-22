@@ -4,24 +4,23 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import create.develop.moviemappers.BuildConfig
-import create.develop.moviemappers.data.star.Star
-import create.develop.moviemappers.data.DataService
 import create.develop.moviemappers.data.MoviesServiceGET
-import create.develop.moviemappers.data.movie.FetchMoviesService
 import create.develop.moviemappers.data.movie.Movie
 import create.develop.moviemappers.data.movie.MovieDto
 import create.develop.moviemappers.data.movie.toMovieDto
-import create.develop.moviemappers.data.star.FetchLocalStarsService
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class StarMainViewModel : ViewModel() {
+@HiltViewModel
+class StarMainViewModel @Inject constructor(
+    private val remoteMoviesRepository: MoviesServiceGET
+) : ViewModel() {
 
-    private val localStarsRepository: DataService<Star> = FetchLocalStarsService()
-    private val remoteMoviesRepository: MoviesServiceGET = FetchMoviesService()
     private val _state = MutableStateFlow(StarUIState(isLoading = false))
     val state = _state.asStateFlow()
 

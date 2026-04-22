@@ -1,7 +1,6 @@
 package create.develop.moviemappers.data
 
 import create.develop.moviemappers.data.movie.Movie
-import create.develop.moviemappers.data.movie.MovieDto
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
